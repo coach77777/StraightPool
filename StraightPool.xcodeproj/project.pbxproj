@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		448085352EC607110056973D /* players.csv in Resources */ = {isa = PBXBuildFile; fileRef = 4480852F2EC5CE2F0056973D /* players.csv */; };
+		448085362EC6076E0056973D /* weeks_extracted.csv in Resources */ = {isa = PBXBuildFile; fileRef = 448085302EC5CE410056973D /* weeks_extracted.csv */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		444BB3532EC4C77D005B91FE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +32,8 @@
 		444BB3432EC4C77C005B91FE /* StraightPool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StraightPool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		444BB3522EC4C77D005B91FE /* StraightPoolTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StraightPoolTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		444BB35C2EC4C77D005B91FE /* StraightPoolUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StraightPoolUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4480852F2EC5CE2F0056973D /* players.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = players.csv; sourceTree = "<group>"; };
+		448085302EC5CE410056973D /* weeks_extracted.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = weeks_extracted.csv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -79,6 +86,7 @@
 				444BB3552EC4C77D005B91FE /* StraightPoolTests */,
 				444BB35F2EC4C77D005B91FE /* StraightPoolUITests */,
 				444BB3442EC4C77C005B91FE /* Products */,
+				4480852E2EC5CBA90056973D /* Data */,
 			);
 			sourceTree = "<group>";
 		};
@@ -90,6 +98,15 @@
 				444BB35C2EC4C77D005B91FE /* StraightPoolUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		4480852E2EC5CBA90056973D /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				448085302EC5CE410056973D /* weeks_extracted.csv */,
+				4480852F2EC5CE2F0056973D /* players.csv */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +229,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				448085352EC607110056973D /* players.csv in Resources */,
+				448085362EC6076E0056973D /* weeks_extracted.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
