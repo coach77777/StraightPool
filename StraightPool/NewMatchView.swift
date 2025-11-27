@@ -161,8 +161,8 @@ struct NewMatchView: View {
         let match = Match(
             player1: p1,
             player2: p2,
-            targetScore: target
-        )
+            targetScore: target,
+            weekLabel: selectedWeekLabel // <-- whatever your Week / Date picker exposes        )
         match.note = weeks[selectedWeekIndex]
 
         modelContext.insert(match)

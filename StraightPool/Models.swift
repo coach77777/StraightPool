@@ -44,6 +44,10 @@ final class Match: Identifiable {
 
     @Relationship var player1: Player
     @Relationship var player2: Player
+    
+    // NEW: week label (e.g. "Wk-1 – 3-Sep")
+        var weekLabel: String
+    
 
     var targetScore: Int
     var score1: Int
@@ -60,6 +64,12 @@ final class Match: Identifiable {
     var highRun2: Int
 
     var activePlayerIndex: Int   // 0 or 1
+    // NEW: innings
+        /// Completed innings (P1 turn + P2 turn = 1 inning)
+        var innings: Int
+        /// Internal counter: 0 or 1 turns inside the current inning
+        var turnsInCurrentInning: Int
+    
     var isCompleted: Bool
     var winnerIndex: Int?
 
@@ -73,12 +83,15 @@ final class Match: Identifiable {
         player1: Player,
         player2: Player,
         targetScore: Int = 100,
+        weekLabel: String = "",
         createdAt: Date = .now
     ) {
         self.id = id
         self.player1 = player1
         self.player2 = player2
         self.targetScore = targetScore
+        self.weekLabel = weekLabel
+
         self.score1 = 0
         self.score2 = 0
         self.fouls1 = 0
