@@ -2,52 +2,101 @@ import SwiftUI
 import SwiftData
 
 struct PlayersView: View {
-    @Environment(\.modelContext) private var context
-    @Query(sort: \Player.createdAt, order: .reverse) private var players: [Player]
-    @State private var newName: String = ""
+    @Environment(\.openURL) private var openURL
+    @Environment(\.modelContext) private var modelContext
+
+    @Query(sort: \Player.name) private var players: [Player]
+    @State private var selectedIndex: Int = 0
+
+    private var currentPlayer: Player? {
+        guard !players.isEmpty else { return nil }
+        return players[min(selectedIndex, players.count - 1)]
+    }
 
     var body: some View {
         NavigationStack {
-            List {
-                Section("Add Player") {
-                    HStack {
-                        TextField("Name", text: $newName)
-                        Button("Add") { addPlayer() }
-                            .disabled(newName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+            VStack(alignment: .leading, spacing: 16) {
+
+                if players.isEmpty {
+                    Text("No players loaded.")
+                        .font(.headline)
+                        .foregroundStyle(.secondary)
+                } else {
+
+                    // DROPDOWN
+                    Picker("Select player", selection: $selectedIndex) {
+                        ForEach(players.indices, id: \.self) { i in
+                            Text("#\(i + 1) \(players[i].name)")
+                                .font(.system(size: 20, weight: .bold))
+                                .tag(i)
+                        }
+                    }
+                    .pickerStyle(.menu)
+
+                    Text("Loaded: \(players.count) players")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+
+                    if let p = currentPlayer {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Player: #\(selectedIndex + 1) \(p.name)")
+                                .font(.headline)
+
+                            if let phone = p.phone, !phone.isEmpty {
+                                Text("Phone: \(phone)")
+                            }
+
+                            if let email = p.email, !email.isEmpty {
+                                Text("Email: \(email)")
+                            }
+                        }
+                        .padding(.top, 8)
+
+                        HStack(spacing: 16) {
+                            if let phone = p.phone, !phone.isEmpty {
+                                Button("Call") { call(phone) }
+                                    .buttonStyle(.borderedProminent)
+
+                                Button("Text") { text(phone) }
+                                    .buttonStyle(.bordered)
+                            }
+
+                            if let email = p.email, !email.isEmpty {
+                                Button("Email") { emailPlayer(email) }
+                                    .buttonStyle(.bordered)
+                            }
+                        }
+                        .padding(.top, 4)
                     }
                 }
 
-                Section("All Players") {
-                    ForEach(players) { p in
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(p.name).font(.headline)
-                                if let email = p.email {
-                                    Text(email).foregroundStyle(.secondary).lineLimit(1)
-                                }
-                            }
-                            Spacer()
-                        }
-                    }
-                    .onDelete(perform: delete)
-                }
+                Spacer()
             }
+            .padding()
             .navigationTitle("Players")
-            .toolbar { EditButton() }
         }
     }
 
-    private func addPlayer() {
-        let trimmed = newName.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else { return }
-        context.insert(Player(name: trimmed))
-        newName = ""
-        try? context.save()
+    // MARK: - Actions
+
+    private func digits(from phone: String) -> String {
+        phone.filter("0123456789".contains)
     }
 
-    private func delete(at offsets: IndexSet) {
-        for i in offsets { context.delete(players[i]) }
-        try? context.save()
+    private func call(_ phone: String) {
+        let number = digits(from: phone)
+        guard let url = URL(string: "tel://\(number)") else { return }
+        openURL(url)
+    }
+
+    private func text(_ phone: String) {
+        let number = digits(from: phone)
+        guard let url = URL(string: "sms:\(number)") else { return }
+        openURL(url)
+    }
+
+    private func emailPlayer(_ email: String) {
+        guard let url = URL(string: "mailto:\(email)") else { return }
+        openURL(url)
     }
 }
-
