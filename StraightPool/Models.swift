@@ -41,57 +41,65 @@ final class ScoreEvent: Identifiable {
 @Model
 final class Match: Identifiable {
     @Attribute(.unique) var id: UUID
-
+    
     @Relationship var player1: Player
     @Relationship var player2: Player
     
     // NEW: week label (e.g. "Wk-1 – 3-Sep")
-        var weekLabel: String
+    var weekLabel: String
     
-
+    
     var targetScore: Int
     var score1: Int
     var score2: Int
-
+    
     var fouls1: Int
     var fouls2: Int
     var consecutiveFouls1: Int
     var consecutiveFouls2: Int
-
+    
     var currentRun1: Int
     var currentRun2: Int
     var highRun1: Int
     var highRun2: Int
-
+    
     var activePlayerIndex: Int   // 0 or 1
     // NEW: innings
-        /// Completed innings (P1 turn + P2 turn = 1 inning)
-        var innings: Int
-        /// Internal counter: 0 or 1 turns inside the current inning
-        var turnsInCurrentInning: Int
+    /// Completed innings (P1 turn + P2 turn = 1 inning)
+   
+    /// // NEW
+    var breakerIndex: Int        // 0 = player1, 1 = player2    ///
+    
+    // NEW — rack tracking for 14.1 continuous
+        var ballsMade: Int           // increments only on Pocket Ball +1
+    
+    var innings: Int
+    /// Internal counter: 0 or 1 turns inside the current inning
+    var turnsInCurrentInning: Int
     
     var isCompleted: Bool
     var winnerIndex: Int?
-
+    
     @Relationship(deleteRule: .cascade) var events: [ScoreEvent]
-
+    
     var createdAt: Date
     var note: String?
-
+    
     init(
         id: UUID = UUID(),
         player1: Player,
         player2: Player,
-        targetScore: Int = 100,
+        targetScore: Int = 125,
         weekLabel: String = "",
+        breakerIndex: Int = 0,        // NEW PARAM
         createdAt: Date = .now
     ) {
         self.id = id
         self.player1 = player1
         self.player2 = player2
-        self.targetScore = targetScore
         self.weekLabel = weekLabel
-
+        self.targetScore = targetScore
+        
         self.score1 = 0
         self.score2 = 0
         self.fouls1 = 0
@@ -103,9 +111,18 @@ final class Match: Identifiable {
         self.highRun1 = 0
         self.highRun2 = 0
         self.activePlayerIndex = 0
-        self.isCompleted = false
+        self.breakerIndex = breakerIndex   // NEW
+        
+        self.ballsMade = 0    // IMPORTANT for rack UI
+
+        self.innings = 0
+        self.turnsInCurrentInning = 0
+        
+        self.isCompleted = false          // missing line
+        
         self.winnerIndex = nil
         self.events = []
         self.createdAt = createdAt
+        self.note = nil
     }
 }

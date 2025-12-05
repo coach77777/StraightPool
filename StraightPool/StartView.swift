@@ -89,6 +89,7 @@ struct StartView: View {
                 .font(.headline)
                 .frame(maxWidth: .infinity)
                 .padding()
+                .foregroundStyle(.blue)
                 .background(Color.gray.opacity(0.15))
                 .clipShape(RoundedRectangle(cornerRadius: 14))
         }

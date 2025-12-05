@@ -5,10 +5,10 @@ import SwiftData
 struct NewMatchView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
-
+    
     // Players from SwiftData, sorted by name.
     @Query(sort: \Player.name) private var players: [Player]
-
+    
     // Simple weeks list for now – later we can load from weeks.csv
     private let weeks: [String] = [
         "Wk-1 – 3-Sep",
@@ -17,35 +17,35 @@ struct NewMatchView: View {
         "Wk-4 – 24-Sep"
         // …add more as needed
     ]
-
+    
     @State private var selectedWeekIndex: Int = 0
     @State private var playerAIndex: Int = 0
     @State private var playerBIndex: Int = 1
     @State private var targetScoreText: String = "125"
-
+    
     // Opening-break / scoring wiring
     @State private var showOpeningBreak = false
     @State private var openingGameState: GameState? = nil
     @State private var openingBreakState = OpeningBreakState()
     @State private var pendingMatch: Match? = nil
-
+    
     /// Called back to StartView when a new Match is ready
     /// so StartView can present MatchDetailView (scorekeeper).
     let onMatchCreated: (Match) -> Void
-
+    
     // MARK: - Derived values
-
+    
     private var targetScore: Int? {
         Int(targetScoreText)
     }
-
+    
     private var canStartMatch: Bool {
         guard players.count >= 2 else { return false }
         guard playerAIndex != playerBIndex else { return false }
         guard let t = targetScore, t > 0 else { return false }
         return true
     }
-
+    
     var body: some View {
         NavigationStack {
             Form {
@@ -57,7 +57,7 @@ struct NewMatchView: View {
                         }
                     }
                 }
-
+                
                 // Player A / Player B
                 Section {
                     if players.count < 2 {
@@ -70,7 +70,7 @@ struct NewMatchView: View {
                                 Text(players[i].name).tag(i)
                             }
                         }
-
+                        
                         Picker("Player B", selection: $playerBIndex) {
                             ForEach(players.indices, id: \.self) { i in
                                 Text(players[i].name).tag(i)
@@ -80,13 +80,13 @@ struct NewMatchView: View {
                 } header: {
                     Text("Players")
                 }
-
+                
                 // Target score
                 Section("Target score") {
                     TextField("Target score", text: $targetScoreText)
                         .keyboardType(.numberPad)
                 }
-
+                
                 // Opening Break button
                 Section {
                     Button {
@@ -124,17 +124,17 @@ struct NewMatchView: View {
                     ) { finalGame in
                         // 1) Apply GameState → Match
                         applyOpeningResult(finalGame, to: match)
-
+                        
                         // 2) Save
                         do {
                             try modelContext.save()
                         } catch {
                             print("Failed to save match after opening break: \(error)")
                         }
-
+                        
                         // 3) Tell StartView which match to open in Scorekeeper
                         onMatchCreated(match)
-
+                        
                         // 4) Dismiss this Match Setup sheet
                         dismiss()
                     }
@@ -145,39 +145,50 @@ struct NewMatchView: View {
             }
         }
     }
-
+    
     // MARK: - Actions
-
+    
     private func startMatchAndShowOpeningBreak() {
-        guard canStartMatch,
-              let target = targetScore,
-              players.indices.contains(playerAIndex),
-              players.indices.contains(playerBIndex) else { return }
-
+        // Basic validation
+        guard canStartMatch else { return }
+        
+        guard players.indices.contains(playerAIndex),
+              players.indices.contains(playerBIndex)
+        else { return }
+        
+        guard let target = targetScore else { return }
+        
         let p1 = players[playerAIndex]
         let p2 = players[playerBIndex]
-
+        
+        // Week label from picker
+        let weekText: String
+        if weeks.indices.contains(selectedWeekIndex) {
+            weekText = weeks[selectedWeekIndex]
+        } else {
+            weekText = ""
+        }
+        
         // 1) Create & save Match in SwiftData
         let match = Match(
             player1: p1,
             player2: p2,
             targetScore: target,
-            weekLabel: selectedWeekLabel // <-- whatever your Week / Date picker exposes        )
-        match.note = weeks[selectedWeekIndex]
-
+            weekLabel: weekText,
+            breakerIndex: 0,)
+        
+        match.note = weekText   // optional
+        
         modelContext.insert(match)
-
+        
         do {
             try modelContext.save()
+            print("Match saved: \(match.id)")
         } catch {
             print("Failed to save match: \(error)")
         }
-
-        pendingMatch = match
-
-        // 2) Build initial GameState for the opening break
-        openingBreakState = OpeningBreakState(breakerIndex: 0, foulCount: 0)
-
+        
+        // 2) Build initial GameState for Opening Break
         openingGameState = GameState(
             player1Name: p1.name,
             player2Name: p2.name,
@@ -187,13 +198,19 @@ struct NewMatchView: View {
             fouls2: 0,
             consecutiveFouls1: 0,
             consecutiveFouls2: 0,
-            activePlayerIndex: openingBreakState.breakerIndex
+            activePlayerIndex: 0
         )
-
+        
+        openingBreakState = OpeningBreakState(breakerIndex: 0)
+        
+        // Remember which match this belongs to
+        pendingMatch = match
+        
         // 3) Show Opening Break screen
         showOpeningBreak = true
     }
-
+    
+    
     /// Copy the final GameState from the opening break into the Match model.
     private func applyOpeningResult(_ finalGame: GameState, to match: Match) {
         // Normal case: names line up with player1/player2
@@ -215,6 +232,10 @@ struct NewMatchView: View {
             match.consecutiveFouls1 = finalGame.consecutiveFouls2
             match.consecutiveFouls2 = finalGame.consecutiveFouls1
             match.activePlayerIndex = finalGame.activePlayerIndex == 0 ? 1 : 0
+        }
+        // After the opening break, we are *in* inning 1.
+        if match.innings < 1 {
+            match.innings = 1
         }
     }
 }
