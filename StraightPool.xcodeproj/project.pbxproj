@@ -6,34 +6,8 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		448085352EC607110056973D /* players.csv in Resources */ = {isa = PBXBuildFile; fileRef = 4480852F2EC5CE2F0056973D /* players.csv */; };
-		448085362EC6076E0056973D /* weeks_extracted.csv in Resources */ = {isa = PBXBuildFile; fileRef = 448085302EC5CE410056973D /* weeks_extracted.csv */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		444BB3532EC4C77D005B91FE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 444BB33B2EC4C77C005B91FE /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 444BB3422EC4C77C005B91FE;
-			remoteInfo = StraightPool;
-		};
-		444BB35D2EC4C77D005B91FE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 444BB33B2EC4C77C005B91FE /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 444BB3422EC4C77C005B91FE;
-			remoteInfo = StraightPool;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		444BB3432EC4C77C005B91FE /* StraightPool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StraightPool.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		444BB3522EC4C77D005B91FE /* StraightPoolTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StraightPoolTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		444BB35C2EC4C77D005B91FE /* StraightPoolUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StraightPoolUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4480852F2EC5CE2F0056973D /* players.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = players.csv; sourceTree = "<group>"; };
-		448085302EC5CE410056973D /* weeks_extracted.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = weeks_extracted.csv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -62,20 +36,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		444BB34F2EC4C77D005B91FE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		444BB3592EC4C77D005B91FE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -86,7 +46,6 @@
 				444BB3552EC4C77D005B91FE /* StraightPoolTests */,
 				444BB35F2EC4C77D005B91FE /* StraightPoolUITests */,
 				444BB3442EC4C77C005B91FE /* Products */,
-				4480852E2EC5CBA90056973D /* Data */,
 			);
 			sourceTree = "<group>";
 		};
@@ -94,19 +53,8 @@
 			isa = PBXGroup;
 			children = (
 				444BB3432EC4C77C005B91FE /* StraightPool.app */,
-				444BB3522EC4C77D005B91FE /* StraightPoolTests.xctest */,
-				444BB35C2EC4C77D005B91FE /* StraightPoolUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		4480852E2EC5CBA90056973D /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				448085302EC5CE410056973D /* weeks_extracted.csv */,
-				4480852F2EC5CE2F0056973D /* players.csv */,
-			);
-			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,52 +82,6 @@
 			productReference = 444BB3432EC4C77C005B91FE /* StraightPool.app */;
 			productType = "com.apple.product-type.application";
 		};
-		444BB3512EC4C77D005B91FE /* StraightPoolTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 444BB3692EC4C77D005B91FE /* Build configuration list for PBXNativeTarget "StraightPoolTests" */;
-			buildPhases = (
-				444BB34E2EC4C77D005B91FE /* Sources */,
-				444BB34F2EC4C77D005B91FE /* Frameworks */,
-				444BB3502EC4C77D005B91FE /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				444BB3542EC4C77D005B91FE /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				444BB3552EC4C77D005B91FE /* StraightPoolTests */,
-			);
-			name = StraightPoolTests;
-			packageProductDependencies = (
-			);
-			productName = StraightPoolTests;
-			productReference = 444BB3522EC4C77D005B91FE /* StraightPoolTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		444BB35B2EC4C77D005B91FE /* StraightPoolUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 444BB36C2EC4C77D005B91FE /* Build configuration list for PBXNativeTarget "StraightPoolUITests" */;
-			buildPhases = (
-				444BB3582EC4C77D005B91FE /* Sources */,
-				444BB3592EC4C77D005B91FE /* Frameworks */,
-				444BB35A2EC4C77D005B91FE /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				444BB35E2EC4C77D005B91FE /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				444BB35F2EC4C77D005B91FE /* StraightPoolUITests */,
-			);
-			name = StraightPoolUITests;
-			packageProductDependencies = (
-			);
-			productName = StraightPoolUITests;
-			productReference = 444BB35C2EC4C77D005B91FE /* StraightPoolUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -192,14 +94,6 @@
 				TargetAttributes = {
 					444BB3422EC4C77C005B91FE = {
 						CreatedOnToolsVersion = 16.4;
-					};
-					444BB3512EC4C77D005B91FE = {
-						CreatedOnToolsVersion = 16.4;
-						TestTargetID = 444BB3422EC4C77C005B91FE;
-					};
-					444BB35B2EC4C77D005B91FE = {
-						CreatedOnToolsVersion = 16.4;
-						TestTargetID = 444BB3422EC4C77C005B91FE;
 					};
 				};
 			};
@@ -218,30 +112,12 @@
 			projectRoot = "";
 			targets = (
 				444BB3422EC4C77C005B91FE /* StraightPool */,
-				444BB3512EC4C77D005B91FE /* StraightPoolTests */,
-				444BB35B2EC4C77D005B91FE /* StraightPoolUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		444BB3412EC4C77C005B91FE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				448085352EC607110056973D /* players.csv in Resources */,
-				448085362EC6076E0056973D /* weeks_extracted.csv in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		444BB3502EC4C77D005B91FE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		444BB35A2EC4C77D005B91FE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -258,34 +134,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		444BB34E2EC4C77D005B91FE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		444BB3582EC4C77D005B91FE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		444BB3542EC4C77D005B91FE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 444BB3422EC4C77C005B91FE /* StraightPool */;
-			targetProxy = 444BB3532EC4C77D005B91FE /* PBXContainerItemProxy */;
-		};
-		444BB35E2EC4C77D005B91FE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 444BB3422EC4C77C005B91FE /* StraightPool */;
-			targetProxy = 444BB35D2EC4C77D005B91FE /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		444BB3642EC4C77D005B91FE /* Debug */ = {
@@ -465,78 +314,6 @@
 			};
 			name = Release;
 		};
-		444BB36A2EC4C77D005B91FE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = PAT68ATK63;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.StraightPool.StraightPoolTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StraightPool.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StraightPool";
-			};
-			name = Debug;
-		};
-		444BB36B2EC4C77D005B91FE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = PAT68ATK63;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.StraightPool.StraightPoolTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StraightPool.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StraightPool";
-			};
-			name = Release;
-		};
-		444BB36D2EC4C77D005B91FE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = PAT68ATK63;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.StraightPool.StraightPoolUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = StraightPool;
-			};
-			name = Debug;
-		};
-		444BB36E2EC4C77D005B91FE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = PAT68ATK63;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.StraightPool.StraightPoolUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = StraightPool;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -554,24 +331,6 @@
 			buildConfigurations = (
 				444BB3672EC4C77D005B91FE /* Debug */,
 				444BB3682EC4C77D005B91FE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		444BB3692EC4C77D005B91FE /* Build configuration list for PBXNativeTarget "StraightPoolTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				444BB36A2EC4C77D005B91FE /* Debug */,
-				444BB36B2EC4C77D005B91FE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		444BB36C2EC4C77D005B91FE /* Build configuration list for PBXNativeTarget "StraightPoolUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				444BB36D2EC4C77D005B91FE /* Debug */,
-				444BB36E2EC4C77D005B91FE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
